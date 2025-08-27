@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { listEntries } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://your-domain.com";
+  const base = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
   const staticRoutes: MetadataRoute.Sitemap = [
     "", "/features", "/pricing", "/download", "/docs", "/blog", "/changelog", "/support",
