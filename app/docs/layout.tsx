@@ -1,19 +1,28 @@
-export default function DocsLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="grid lg:grid-cols-[240px_1fr] gap-8">
-      <aside className="space-y-3 sticky top-6 h-fit">
-        <h2 className="text-sm uppercase tracking-wide text-[var(--ink-soft)]">Docs</h2>
-        <nav className="text-sm space-y-2">
-          <a href="/docs/getting-started">Getting Started</a>
-          <a href="/docs/install">Install</a>
-          <a href="/docs/cli">CLI</a>
-        </nav>
-      </aside>
+import type { ReactNode, SuspenseProps } from "react";
+import "./content.css"; // optional; or keep using globals.css
+import { Suspense } from "react";
+import DocsSidebar from "../_components/DocsSideBar";
+import Toc from "../_components/Toc";
 
-      {/* Prose styling here */}
-      <article className="prose prose-invert prose-docs max-w-none">
-        {children}
-      </article>
-    </div>
+export default function DocsLayout({ children }: { children: ReactNode }) {
+  return (
+    <section className="grid gap-8 lg:grid-cols-[240px_minmax(0,1fr)_240px]">
+      {/* left: sidebar */}
+      <div className="hidden lg:block">
+        <Suspense fallback={null}>
+          <DocsSidebar />
+        </Suspense>
+      </div>
+
+      {/* center: page content */}
+      <div>{children}</div>
+
+      {/* right: toc */}
+      <div className="hidden xl:block">
+        <Suspense fallback={null}>
+          <Toc />
+        </Suspense>
+      </div>
+    </section>
   );
 }
