@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description: "Your product’s home: downloads, docs, changelog, and more.",
   openGraph: {
     type: "website",
-    url: "https://myaetherhub.com",                // ✅ was "https://your-domain.com"
+    url: "https://myaetherhub.com",           
     siteName: "Aetherhub",
     title: "Aetherhub — Software that ships",
     description: "Your product’s home: downloads, docs, changelog, and more.",
