@@ -1,7 +1,6 @@
-import type { ReactNode, SuspenseProps } from "react";
-import "./content.css"; // optional; or keep using globals.css
+import type { ReactNode } from "react";
 import { Suspense } from "react";
-import DocsSidebar from "../_components/DocsSideBar";
+import DocsSidebar from "../_components/DocsSidebar";
 import Toc from "../_components/Toc";
 
 export default function DocsLayout({ children }: { children: ReactNode }) {
