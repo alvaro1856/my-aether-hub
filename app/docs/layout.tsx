@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import { Suspense } from "react";
 import DocsSidebar from "../_components/DocsSidebar";
-import Toc from "../_components/Toc";
+import TocHighlighter from "../_components/TocHighLighter"; // ensure spelling matches your file
+import ClientToc from "../_components/ClientToc"; // <-- use wrapper
 
 export default function DocsLayout({ children }: { children: ReactNode }) {
   return (
@@ -14,13 +15,14 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
       </div>
 
       {/* center: page content */}
-      <div>{children}</div>
+      <div>
+        {children}
+        <TocHighlighter />
+      </div>
 
       {/* right: toc */}
       <div className="hidden xl:block">
-        <Suspense fallback={null}>
-          <Toc />
-        </Suspense>
+        <ClientToc />
       </div>
     </section>
   );

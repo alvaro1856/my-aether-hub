@@ -19,6 +19,17 @@
   }
 }
 
+nav a[data-toc-link="true"][data-active="true"] {
+  font-weight: 600;
+  text-decoration: underline;
+  background: color-mix(in oklab, var(--brand) 12%, transparent);
+  border-left: 2px solid var(--brand);
+  padding-left: .5rem;
+}
+
+html { scroll-behavior: smooth; }
+article :is(h2,h3,h4)[id] { scroll-margin-top: 80px; }
+
 /* shared buttons */
 .btn { @apply inline-flex items-center gap-2 rounded-2xl px-4 py-2 font-medium transition shadow; }
 .btn-brand { background: var(--brand); color: var(--brand-ink); }
