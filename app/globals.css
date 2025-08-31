@@ -2,23 +2,64 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* your variables ... */
+/* ───────────────── Tokens ───────────────── */
 :root{
   --app:#0f1221;
   --panel:#171a2b;
+  --panel-soft: color-mix(in oklab, var(--panel) 92%, black);
   --ink:#e8e9f3;
   --ink-soft:#b6b9d6;
   --ink-border:#2a2e45;
   --brand:#ff4d6d;
   --brand-ink:#fff1f3;
+  --ring: color-mix(in oklab, var(--brand) 70%, white);
+  --muted: color-mix(in oklab, var(--ink) 60%, transparent);
 }
+
+:root[data-theme="light"] {
+  --app:#f8fafc;
+  --panel:#ffffff;
+  --panel-soft:#ffffff;
+  --ink:#0b1020;
+  --ink-soft:#4b5563;
+  --ink-border:#e5e7eb;
+  --brand:#ff4d6d;
+  --brand-ink:#2a0a12;
+}
+
+/* Respect OS on first paint if no explicit theme set */
 @media (prefers-color-scheme: light) {
-  :root{
-    --app:#f8fafc; --panel:#ffffff; --ink:#0b1020; --ink-soft:#4b5563;
-    --ink-border:#e5e7eb; --brand:#ff4d6d; --brand-ink:#2a0a12;
+  :root:not([data-theme]) {
+    --app:#f8fafc;
+    --panel:#ffffff;
+    --panel-soft:#ffffff;
+    --ink:#0b1020;
+    --ink-soft:#4b5563;
+    --ink-border:#e5e7eb;
+    --brand:#ff4d6d;
+    --brand-ink:#2a0a12;
   }
 }
 
+/* ─────────────── Base surfaces ─────────────── */
+html, body { background: var(--app); color: var(--ink); }
+::selection { background: color-mix(in oklab, var(--brand) 30%, transparent); }
+
+/* Focus ring */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+  border-radius: .5rem;
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+/* Smooth anchors & space under sticky headers */
+html { scroll-behavior: smooth; }
+article :is(h2,h3,h4)[id] { scroll-margin-top: 80px; }
+
+/* Active ToC link */
 nav a[data-toc-link="true"][data-active="true"] {
   font-weight: 600;
   text-decoration: underline;
@@ -27,15 +68,14 @@ nav a[data-toc-link="true"][data-active="true"] {
   padding-left: .5rem;
 }
 
-html { scroll-behavior: smooth; }
-article :is(h2,h3,h4)[id] { scroll-margin-top: 80px; }
-
-/* shared buttons */
+/* ─────────────── Reusable buttons ─────────────── */
 .btn { @apply inline-flex items-center gap-2 rounded-2xl px-4 py-2 font-medium transition shadow; }
 .btn-brand { background: var(--brand); color: var(--brand-ink); }
+.btn-brand:hover { filter: brightness(1.05); }
 .btn-ghost { @apply border; border-color: var(--ink-border); }
+.btn-ghost:hover { background: color-mix(in oklab, var(--ink) 6%, transparent); }
 
-/* --- optional: tune prose to your palette --- */
+/* ───────────── Typography skin for MDX (.prose + .prose-invert) ───────────── */
 .prose-docs {
   /* base text & headings */
   --tw-prose-body: var(--ink);
@@ -53,9 +93,48 @@ article :is(h2,h3,h4)[id] { scroll-margin-top: 80px; }
   --tw-prose-links: var(--brand);
   --tw-prose-code: var(--brand);
   --tw-prose-pre-code: var(--ink);
-  --tw-prose-pre-bg: color-mix(in oklab, var(--panel) 92%, black);
+  --tw-prose-pre-bg: var(--panel-soft);
 
   /* tables */
   --tw-prose-th-borders: var(--ink-border);
   --tw-prose-td-borders: var(--ink-border);
+}
+
+/* Link treatment */
+.prose-docs a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color .2s ease;
+}
+.prose-docs a:hover {
+  color: color-mix(in oklab, var(--brand) 80%, white);
+}
+
+/* Headings rhythm */
+.prose-docs h2 { margin-top: 2.25rem; }
+.prose-docs h3 { margin-top: 1.75rem; }
+
+/* Blockquotes */
+.prose-docs blockquote {
+  background: var(--panel);
+  border-left: 3px solid var(--brand);
+  padding: .75rem 1rem;
+  border-radius: .75rem;
+}
+
+/* Inline code */
+.prose-docs :not(pre) > code {
+  background: var(--panel);
+  padding: 0.1em 0.35em;
+  border-radius: 0.35em;
+  font-size: .875em;
+}
+
+/* Tables */
+.prose-docs table {
+  border-radius: .75rem;
+  overflow: hidden;
+}
+.prose-docs thead th {
+  background: color-mix(in oklab, var(--panel) 85%, black);
 }
