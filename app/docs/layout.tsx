@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import DocsSidebar from "../_components/DocsSidebar";
 import TocHighlighter from "../_components/TocHighLighter"; // ensure spelling matches your file
 import ClientToc from "../_components/ClientToc"; // <-- use wrapper
+import DocsPager from "../_components/DocsPager";
 
 export default function DocsLayout({ children }: { children: ReactNode }) {
   return (
@@ -18,6 +19,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
       <div>
         {children}
         <TocHighlighter />
+        <DocsPager />
       </div>
 
       {/* right: toc */}

@@ -22,3 +22,9 @@ export const DOCS_NAV: NavItem[] = [
     ],
   },
 ];
+
+// Flatten out the sidebar tree for linear prev/next navigation
+export const DOCS_FLAT: NavItem[] = DOCS_NAV.flatMap((n) =>
+  n.items ? n.items : [n]
+).filter((n) => n.href);
+
