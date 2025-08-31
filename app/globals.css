@@ -68,6 +68,12 @@ nav a[data-toc-link="true"][data-active="true"] {
   padding-left: .5rem;
 }
 
+/* Left sidebar active link */
+[data-sidebar-link="true"][data-active="true"] {
+  font-weight: 600;
+  text-decoration: none;
+}
+
 /* ─────────────── Reusable buttons ─────────────── */
 .btn { @apply inline-flex items-center gap-2 rounded-2xl px-4 py-2 font-medium transition shadow; }
 .btn-brand { background: var(--brand); color: var(--brand-ink); }
