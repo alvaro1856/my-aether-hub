@@ -1,9 +1,16 @@
 // global.d.ts
-
-/// <reference types="react" />
+import type { PrismaClient } from "@prisma/client";
 
 declare module "*.mdx" {
-  let MDXComponent: (props: any) => JSX.Element;
-  export const frontmatter: Record<string, any>;
+  import type { MDXProps } from "mdx/types";
+  const MDXComponent: (props: MDXProps) => JSX.Element;
+  export const frontmatter: Record<string, unknown>;
   export default MDXComponent;
 }
+
+declare global {
+  // eslint-disable-next-line no-var
+  var prisma: PrismaClient | undefined;
+}
+
+export {};

@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SiteNav from "./components/SiteNav";
 import SiteFooter from "./components/SiteFooter";
+import NavAuth from "./components/NavAuth";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen bg-[var(--app)] text-[var(--ink)]">
         <div className="mx-auto max-w-6xl px-4">
           <SiteNav />
+          <NavAuth />
           <main className="py-10">{children}</main>
           <SiteFooter />
         </div>
